@@ -6,9 +6,9 @@ import java.util.Queue;
 
 public class Bfs {
     public static void main(String[] args) {
-        int n = 4;
-        int m = 4;
-        int[][] edges = { { 0, 1 }, { 0, 3 }, { 1, 2 }, { 2, 3 } };
+        int n = 9;
+        int m = 10;
+        int[][] edges = { { 0, 8 }, { 1, 6 }, { 1, 7 }, { 1, 8 }, { 5, 8 }, { 6, 0 }, { 7, 3 }, { 7, 4 }, { 2, 5 } };
         ArrayList<Integer> ans = BFS(n, edges);
         System.out.println(ans);
 
@@ -17,17 +17,24 @@ public class Bfs {
     public static ArrayList<Integer> BFS(int v, int[][] edges) {
         ArrayList<ArrayList<Integer>> adj = printAdjacency(v, edges);
         ArrayList<Integer> ans = new ArrayList<>();
-        boolean[] vis = new boolean[v];
-        Queue<Integer> q = new LinkedList<>(); // Use LinkedList as a concrete implementation of Queue
-        q.add(0);
-        vis[0] = true;
-        while (!q.isEmpty()) {
-            int node = q.poll(); // Use poll() method to remove and retrieve the head of the queue
-            ans.add(node);
-            for (int it : adj.get(node)) {
-                if (!vis[it]) {
-                    vis[it] = true;
-                    q.add(it);
+        boolean[] visited = new boolean[v];
+        Queue<Integer> queue = new LinkedList<>(); // Use LinkedList as a concrete implementation of Queue
+
+        for (int i = 0; i < v; i++) {
+            if (!visited[i]) {
+                queue.offer(i);
+                visited[i] = true;
+
+                while (!queue.isEmpty()) {
+                    int currentVertex = queue.poll();
+                    ans.add(currentVertex);
+
+                    for (int neighbor : adj.get(currentVertex)) {
+                        if (!visited[neighbor]) {
+                            queue.offer(neighbor);
+                            visited[neighbor] = true;
+                        }
+                    }
                 }
             }
         }
