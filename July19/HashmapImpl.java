@@ -28,9 +28,6 @@ public class HashmapImpl {
         Map<Integer, List<Integer>> adjMap = adjMapFun(V, E, edges);
 
         // Print adjMap
-        for(adjMap.keySet().iterator().hasNext()){
-            
-        }
         for (Map.Entry<Integer, List<Integer>> entry : adjMap.entrySet()) {
             int vertex = entry.getKey();
             List<Integer> neighbors = entry.getValue();
