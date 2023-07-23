@@ -24,4 +24,5 @@ public class LinkedListImpl {
             edges.add(edge);
         }
     }
+
 }
