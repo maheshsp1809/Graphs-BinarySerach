@@ -32,7 +32,8 @@ public class FindStates {
         while (!q.isEmpty()) {
             int node = q.poll();
             for (int neighbour : roads[node]) {
-
+                if (neighbour == 1) {
+                }
             }
         }
 
