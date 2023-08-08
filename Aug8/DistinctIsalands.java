@@ -29,6 +29,10 @@ public class DistinctIsalands {
                 }
             }
         }
+        for (ArrayList<String> s : set) {
+            System.out.print(s + " ");
+        }
+
         return set.size();
     }
 
