@@ -34,7 +34,7 @@ public class CycleDetectionUndirectedGraphBFS {
         return cycleElements;
     }
 
-    private boolean bfs(int start, boolean[] visited, List<Integer> cycleElements) {
+    private boolean bfs(int start, boolean[] visited, List<Integer> ans) {
         int[] parent = new int[V];
         Arrays.fill(parent, -1);
         Queue<Integer> queue = new LinkedList<>();
@@ -49,15 +49,14 @@ public class CycleDetectionUndirectedGraphBFS {
                     visited[neighbor] = true;
                     queue.add(neighbor);
                     parent[neighbor] = current;
-                } else if (neighbor != parent[current] && parent[current] != -1) {
-                    // A cycle is found
-                    int cycleStart = current;
-                    int cycleEnd = neighbor;
-                    while (cycleStart != cycleEnd) {
-                        cycleElements.add(cycleStart);
-                        cycleStart = parent[cycleStart];
+                } else if (neighbor != parent[current]) {
+                    ans.add(neighbor);
+                    int curr = current;
+                    while (curr != neighbor) {
+                        ans.add(curr);
+                        curr = parent[curr];
                     }
-                    cycleElements.add(cycleEnd);
+                    ans.add(neighbor); // Add the starting node of the cycle to complete the cycle
                     return true;
                 }
             }

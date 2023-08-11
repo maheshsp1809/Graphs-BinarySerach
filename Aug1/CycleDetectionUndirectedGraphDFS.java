@@ -6,7 +6,7 @@ import java.util.List;
 public class CycleDetectionUndirectedGraphDFS {
 
     public static void main(String[] args) {
-        int V = 5; // Number of vertices
+        int V = 8; // Number of vertices
         List<List<Integer>> adj = new ArrayList<>();
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
@@ -16,8 +16,11 @@ public class CycleDetectionUndirectedGraphDFS {
         addEdge(adj, 0, 1);
         addEdge(adj, 1, 2);
         addEdge(adj, 2, 3);
+        addEdge(adj, 2, 6);
         addEdge(adj, 3, 4);
-        addEdge(adj, 4, 1); // Cycle: 1 -> 2 -> 3 -> 4 -> 1
+        addEdge(adj, 4, 5);
+        addEdge(adj, 4, 7);
+        addEdge(adj, 5, 6); // Cycle: 1 -> 2 -> 3 -> 4 -> 1
         ArrayList<Integer> ans = new ArrayList<>();
         if (hasCycle(V, adj, ans)) {
             System.out.println("Cycle is present in the graph.");
