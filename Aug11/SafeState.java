@@ -51,9 +51,9 @@ public class SafeState {
         adj.get(1).add(2);
         adj.get(2).add(3);
         adj.get(2).add(4);
-        adj.get(3).add(4);
+        adj.get(4).add(3);
         adj.get(3).add(5);
-        adj.get(4).add(6);
+        adj.get(6).add(4);
         adj.get(5).add(6);
         adj.get(6).add(7);
         adj.get(8).add(1);

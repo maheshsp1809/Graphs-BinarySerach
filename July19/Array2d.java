@@ -8,7 +8,7 @@ public class Array2d {
         int[][] adjList = new int[n][];
         for (int i = 0; i < n; i++) {
             adjList[i] = new int[1];
-            adjList[i][0] = i;
+            // adjList[i][0] = i;
         }
         for (int i = 0; i < edges.length; i++) {
             int u = edges[i][0];

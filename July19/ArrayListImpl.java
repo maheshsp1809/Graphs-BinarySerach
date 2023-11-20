@@ -35,12 +35,13 @@ public class ArrayListImpl {
         List<List<Integer>> AdjList = new ArrayList<List<Integer>>();
         for (int i = 0; i < V; ++i) {
             AdjList.add(new ArrayList<>());
+            AdjList.get(i).add(i);
         }
         for (List<Integer> edge : edges) {
             int u = edge.get(0);
             int v = edge.get(1);
-            AdjList.get(edge.get(u)).add(edge.get(v));
-            AdjList.get(edge.get(v)).add(edge.get(u));
+            AdjList.get(u).add(v);
+            AdjList.get(v).add(u);
         }
         return AdjList;
 
