@@ -2,16 +2,16 @@ package Nov11;
 
 import java.util.*;
 
-class Pair {
-    int v, wt;
-
-    Pair(int v, int wt) {
-        this.v = v;
-        this.wt = wt;
-    }
-}
-
 public class Dkistra {
+    static class Pair {
+        int v, wt;
+
+        Pair(int v, int wt) {
+            this.v = v;
+            this.wt = wt;
+        }
+    }
+
     public static List<Integer> dijkstra(int[][] edge, int vertices, int edges, int source) {
         List<List<Pair>> l = new ArrayList<>();
         Queue<Pair> pq = new PriorityQueue<>((x, y) -> x.wt - y.wt);
