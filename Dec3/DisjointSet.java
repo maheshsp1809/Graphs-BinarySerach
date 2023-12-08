@@ -1,3 +1,5 @@
+package Dec3;
+
 import java.io.*;
 import java.util.*;
 
@@ -7,7 +9,6 @@ class DisjointSet {
 
     public DisjointSet(int n) {
         for (int i = 0; i <= n; i++) {
-            rank.add(0);
             parent.add(i);
         }
     }
