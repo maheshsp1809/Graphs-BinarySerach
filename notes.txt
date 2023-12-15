@@ -1,0 +1,3 @@
+binary search notes:
+->find pivot i mean a condition to move to right or left
+->sometimes it may have dge cases for index 0 or index n
