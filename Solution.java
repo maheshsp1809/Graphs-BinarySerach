@@ -1,59 +1,61 @@
-package GraphsBinarySerach;
-
-import java.util.*;
+import java.util.Scanner;
 
 public class Solution {
-    public List<Integer> getTotalExecutionTime(int n, List<String> logs) {
-        int[] result = new int[n];
 
-        Stack<Integer> stack = new Stack<>();
+    public static String[][] transposeAndModify(String[][] dataMatrix) {
+        int rows = dataMatrix.length;
+        int cols = dataMatrix[0].length;
+        String[][] transposed = new String[cols][rows];
 
-        int prevTimestamp = 0;
-
-        for (String log : logs) {
-            String[] params = log.split(":");
-
-            int functionId = Integer.parseInt(params[0]);
-            int timestamp = Integer.parseInt(params[2]);
-
-            if (params[1].equals("start")) {
-                // start
-                if (!stack.empty()) {
-                    result[stack.peek()] += timestamp - prevTimestamp;
-                }
-
-                stack.push(functionId);
-
-                prevTimestamp = timestamp;
-            } else {
-                // end
-                stack.pop();
-
-                result[functionId] += timestamp - prevTimestamp + 1;
-
-                prevTimestamp = timestamp + 1;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transposed[j][i] = modifyElement(dataMatrix[i][j], j != 0); // Don't modify city names
             }
         }
+        return transposed;
+    }
 
-        List<Integer> resultList = new ArrayList<>();
-        for (int value : result) {
-            resultList.add(value);
+    private static String modifyElement(String element, boolean isNumeric) {
+        if (isNumeric) {
+            try {
+
+                double value = Double.parseDouble(element);
+                return String.format("%.1f", value + 1);
+            } catch (NumberFormatException e) {
+
+                int index = element.indexOf("M");
+                if (index != -1) {
+                    double numericPart = Double.parseDouble(element.substring(0, index));
+                    return (numericPart + 1) + "M";
+                }
+            }
         }
-
-        return resultList;
+        return element;
     }
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Scanner scanner = new Scanner(System.in);
 
-        int n = 3;
-        List<String> logs = Arrays.asList("0:start:0", "2:start:4", "2:end:5", "1:start:7", "1:end:10", "0:end:11");
+        int rows = scanner.nextInt();
+        int cols = scanner.nextInt();
+        scanner.nextLine();
 
-        List<Integer> result = solution.getTotalExecutionTime(n, logs);
-
-        // Print the result
-        for (int time : result) {
-            System.out.println(time);
+        String[][] dataMatrix = new String[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                dataMatrix[i][j] = scanner.next();
+            }
         }
+
+        String[][] transposedMatrix = transposeAndModify(dataMatrix);
+
+        System.out.println("Transposed and Modified Matrix:");
+        for (int i = 0; i < transposedMatrix.length; i++) {
+            for (int j = 0; j < transposedMatrix[0].length; j++) {
+                System.out.print(transposedMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        scanner.close();
     }
 }
