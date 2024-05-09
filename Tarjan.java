@@ -8,7 +8,7 @@ public class Tarjan {
         System.out.println("Enter the number of edges:");
         int E = scanner.nextInt();
 
-        Graph graph = new Graph(V);
+        GraphListOfLists graph = new GraphListOfLists(V);
         System.out.println("Enter the edges (vertex1 vertex2):");
         for (int i = 0; i < E; ++i) {
             int v = scanner.nextInt();

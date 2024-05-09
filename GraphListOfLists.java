@@ -1,19 +1,25 @@
+import java.util.ArrayList;
+import java.util.*;
 import java.util.Scanner;
 
-class Graph {
+class GraphListOfLists {
     private int V; // Number of vertices
-    private int[][] adjMatrix; // Adjacency Matrix
+    private List<List<Integer>> adj; // Adjacency Matrix using lists
 
-    Graph(int numVertices) {
+    @SuppressWarnings("unchecked")
+    GraphListOfLists(int numVertices) {
         V = numVertices;
-        adjMatrix = new int[V][V];
+        adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
     }
 
     // Method to add an edge to the graph
     void addEdge(int source, int destination) {
-        adjMatrix[source][destination] = 1;
+        adj.get(source).add(destination);
         // For undirected graph, add the reverse edge as well
-        adjMatrix[destination][source] = 1;
+        adj.get(destination).add(source);
     }
 
     public static void main(String[] args) {
@@ -38,8 +44,9 @@ class Graph {
         // Print the adjacency matrix
         System.out.println("Adjacency Matrix:");
         for (int i = 0; i < v; i++) {
-            for (int j = 0; j < v; j++) {
-                System.out.print(g.adjMatrix[i][j] + " ");
+            System.out.print(i + ": ");
+            for (int j : g.adj.get(i)) {
+                System.out.print(j + " ");
             }
             System.out.println();
         }
